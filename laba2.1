@@ -1,0 +1,67 @@
+#include "pch.h" 
+#include <String>
+int prover(char ch[])
+{
+	int k, max, min, zn(0);
+	char s1[255], s2[255];
+	k = strlen(ch);
+	max = pow(2, sizeof(int) * 8 - 1) - 1;
+	min = -1 * pow(2, sizeof(int) * 8 - 1);
+	sprintf(s1, "%d", max);
+	sprintf(s2, "%d", min);
+	if (ch[0] == '-') return 0;
+	for (int i = zn; i < strlen(ch); i++) if (ch[i]<'0' || ch[i]>'9') return 0;
+	if (strlen(ch) < strlen(s1)) return 1;
+	if (strlen(ch) > strlen(s1)) return 0;
+}
+
+int Vvod_and_Proverka() // ввод и проверка числа 
+{
+	char ch[255];
+	while (1)
+	{
+		scanf("%s", ch);
+		if (prover(ch) == 1) break;
+		printf("Ошибка   \nВведите число ещё раз:");
+	}
+	return atoi(ch);
+}
+void sredarifm() {
+	setlocale(LC_ALL, "Rus");
+	int k; // кол-во значений  
+	do {
+		printf("Введите целое неотрицательное кол-во символов: ");
+		k=Vvod_and_Proverka(); // ввод кол-ва значений 
+		if (k > 0)
+			break;
+		else
+			printf("Неккоректный ввод\n");
+	} while (k <= 0);
+	int x;
+	float sredsnach, sredsum, sredarif;
+	x = 0;
+	sredsum = 0;
+	sredarif = 0;
+	while (x < k)
+	{
+		printf("Введите число %d :", x + 1);
+		sredsnach = Vvod_and_Proverka();
+		if (sredsum >= pow(2, (sizeof(int) * 8) - 1) - sredsum || sredsum <= -1 * pow(2, (sizeof(int) * 8) - 1) + sredsum)
+		{
+			printf("Cреднее значение выходит за пределы int \n");
+			return ;
+		}
+		else 
+		{
+			sredsum += sredsnach; //присваивание суммы всех элементов к переменной
+		}
+		x++; //увеличение счетчика на +1 
+	}
+	sredarif = sredsum / k; //деление суммы всех чисел на их кол-во
+	printf("Среднее арифметическое = %f\n", sredarif); //вывод среднего арифм 
+
+}
+int main()
+{
+	sredarifm();
+}
