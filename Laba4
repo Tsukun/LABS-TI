@@ -1,0 +1,66 @@
+  #include "pch.h"
+#include "stdio.h" 
+#include <string> 
+#include <math.h> 
+int kvadrat();
+int prover(char ch[])
+{
+	int k, max, min, zn(0);
+	char s1[255], s2[255];
+	k = strlen(ch);
+	max = pow(2, sizeof(int) * 8 - 1) - 1;
+	min = -1 * pow(2, sizeof(int) * 8 - 1);
+	sprintf(s1, "%d", max);
+	sprintf(s2, "%d", min);
+	if (ch[0] == '-') zn = 1;
+	for (int i = zn; i < strlen(ch); i++) if (ch[i]<'0' || ch[i]>'9') return 0;
+	if (strlen(ch) - zn < strlen(s1)) return 1;
+	if (strlen(ch) - zn > strlen(s1)) return 0;
+	if (strlen(ch) - zn == strlen(s1))
+	{
+		if (zn == 0) for (int i = 0; i < strlen(s1); i++) if (ch[i] > s1[i]) return 0;
+		if (zn == 1) for (int i = 1; i < strlen(s2); i++) if (ch[i] > s2[i]) return 1;
+		return 1;
+	}
+}
+
+int Vvod_and_Proverka() // ввод и проверка числа 
+{
+	char ch[255];
+	while (1)
+	{
+		scanf("%s", ch);
+		if (prover(ch) == 1) break;
+		printf("Число введено неверно \n");
+	}
+	return atoi(ch);
+}
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	kvadrat();
+	return 0;
+}
+
+int kvadrat()
+{
+	int n;
+	printf("Введите размерность массива=");
+	scanf_s("%d", &n);
+	int*arr = new int[n];
+	for (int i = 0; i < n; i++)
+	{
+		printf("Введите %d элемент массива=", i + 1);
+		arr[i] = Vvod_and_Proverka();
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] * arr[i] <= pow(2, (sizeof(int) * 8) - 1)/arr[i])
+			printf("Полный квадрат %d элемента массива = %d \n", i + 1, arr[i] * arr[i]);
+		else
+			printf("Полный квадрат %d элемента массива = выходит за пределы типа данных \n", i + 1);
+
+	}
+	delete[] arr;
+	return 1;
+}
