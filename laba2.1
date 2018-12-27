@@ -37,11 +37,7 @@ void sredarifm() {
 	int k; // кол-во значений  
 	do {
 		printf("Введите целое неотрицательное кол-во символов: ");
-		scanf_s("%d", &k); // ввод кол-ва значений 
-		if (k > 0)
-			break;
-		else
-			printf("Неккоректный ввод\n");
+		k=Vvod_and_Proverka();
 	} while (k <= 0);
 	int x;
 	float sredsnach, sredsum, sredarif;
