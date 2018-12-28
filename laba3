@@ -3,7 +3,7 @@
 #include <String> 
 #include <locale.h> 
 
-int prover(char ch[])
+int check(char ch[])
 {
 	int k, max, min, zn(0);
 	char s1[255], s2[255];
@@ -15,7 +15,7 @@ int prover(char ch[])
 	if (ch[0] == '-') return 0;
 	for (int i = zn; i < strlen(ch); i++)
 	{
-		if (ch[i] < '0')
+		if (ch[i] < '1' && ch[1]!='0')
 			return 0;
 		else if (ch[i] > '9')
 			return 0;
@@ -25,13 +25,13 @@ int prover(char ch[])
 
 }
 
-int Vvod_and_Proverka() // ввод и проверка числа 
+int checkAndInput() // ввод и проверка числа 
 {
 	char ch[255];
 	while (1)
 	{
 		scanf("%s", ch);
-		if (prover(ch) == 1) break;
+		if (check(ch) == 1) break;
 		printf("Некорректный ввод\nВведите число ещё раз:");
 	}
 	return atoi(ch);
@@ -54,7 +54,7 @@ int visYear(int year, int month)
 		do
 		{
 			printf_s("Введите любой день от 1 до %d числа: ", 28 + longYear(year));
-			day = Vvod_and_Proverka();
+			day = checkAndInput();
 			if ((day <= 28 + longYear(year)) && (day > 0))
 				break;
 			else
@@ -65,7 +65,7 @@ int visYear(int year, int month)
 		do
 		{
 			printf_s("Введите любой день от 1 до 30 числа: ");
-			day = Vvod_and_Proverka();
+			day = checkAndInput();
 			if ((day <= 30) && (day > 0))
 				break;
 			else
@@ -76,7 +76,7 @@ int visYear(int year, int month)
 		do
 		{
 			printf_s("Введите любой день от 1 до 31 числа: ");
-			day = Vvod_and_Proverka();
+			day = checkAndInput();
 			if ((day <= 31) && (day > 0))
 				break;
 			else
@@ -127,14 +127,14 @@ int main()
 	int month1, month2, year1, year2, day1, day2;
 
 	printf_s("Введите год 1: ");
-	year1 = Vvod_and_Proverka();
+	year1 = checkAndInput();
 	printf_s("Введите месяц 1: ");
-	month1 = Vvod_and_Proverka();
+	month1 = checkAndInput();
 	day1 = visYear(year1, month1);
 	printf_s("Введите год 2: ");
-	year2 = Vvod_and_Proverka();
+	year2 = checkAndInput();
 	printf_s("Введите месяц 2: ");
-	month2 = Vvod_and_Proverka();
+	month2 = checkAndInput();
 	day2 = visYear(year2, month2);
 
 	printf_s("%d \n", date(day1, day2, MonthName(month1), MonthName(month2), year1, year2));
