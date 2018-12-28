@@ -1,4 +1,4 @@
-#include "pch.h" 
+#include "stdafx.h" 
 #include <String>
 int prover(char ch[])
 {
@@ -28,7 +28,7 @@ int Vvod_and_Proverka() // ввод и проверка числа
 	{
 		scanf("%s", ch);
 		if (prover(ch) == 1) break;
-		printf("Ошибка int  \nВведите число ещё раз:");
+		printf("Ошибка  \nВведите число ещё раз:");
 	}
 	return atoi(ch);
 }
@@ -37,7 +37,7 @@ void sredarifm() {
 	int k; // кол-во значений  
 	do {
 		printf("Введите целое неотрицательное кол-во символов: ");
-		k=Vvod_and_Proverka();
+		k = Vvod_and_Proverka();
 	} while (k <= 0);
 	int x;
 	float sredsnach, sredsum, sredarif;
@@ -51,9 +51,9 @@ void sredarifm() {
 		if (sredsum >= pow(2, (sizeof(int) * 8) - 1) - sredsum || sredsum <= -1 * pow(2, (sizeof(int) * 8) - 1) + sredsum)
 		{
 			printf("Cреднее значение выходит за пределы int \n");
-			return ;
+			return;
 		}
-		else 
+		else
 		{
 			sredsum += sredsnach; //присваивание суммы всех элементов к переменной
 		}
