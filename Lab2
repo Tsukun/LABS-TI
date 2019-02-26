@@ -1,0 +1,47 @@
+// ConsoleApplication52.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+#include <string.h>
+#include <stdlib.h>
+
+
+int main()
+{
+	int r = rand();
+	char sent[30];
+	char binary[90] = {};
+	char alp[8] = { 'a','b', 'c', 'd', 'e', 'f', 'g', 'h' };
+	for (int i = 0; i < 30; i++)
+	{
+		int k = rand() % 8;
+		sent[i] = alp[k];
+		while (k>1)
+		{
+			int stpcount = 0;
+			binary[i] = k % 2;
+				k /= 2;	
+				stpcount++;
+		}
+	}
+
+	for (int i = 0; i < 30; i++) 
+	{
+		printf("%c   ", sent[i]);
+		
+		
+		/*if (r < RAND_MAX / 10)
+		{
+			//10%
+		}
+		else
+		{
+			//90%
+		}*/
+	}
+	printf("\n");
+	for (int i = 0; i < 90; i++)
+	printf("%d ", binary[i]);
+		return 0;
+}
+
