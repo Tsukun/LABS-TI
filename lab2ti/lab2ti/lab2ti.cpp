@@ -2,9 +2,6 @@
 //
 
 #include "pch.h"
-#include <iostream>
-
-#include "pch.h" 
 #include <iostream> 
 #include <string.h> 
 #include <stdlib.h> 
@@ -19,7 +16,7 @@ int randomSent(char sent[], char alp[])
 	return 0;
 }
 
-int binaryEncrypt(char sent[],char binary[])
+int binaryEncrypt(char sent[], char binary[])
 {
 	int count = 0;
 	for (int i = 0; i < 30; i++)
@@ -37,62 +34,66 @@ int binaryEncrypt(char sent[],char binary[])
 	}
 	return 0;
 }
-int Decrypt(char binary[],char sent[],char alph[])
-{ 
-	
+int Decrypt(char binary[], char sent[], char alph[])
+{
+
 	int count = 0;
-	
+
 	for (int i = 0; i < 30; i++)
 	{
-		
-			
-			int mod;
-			int lastElement = count + 3;
-			int stpcount = 0;
-			int k = 7;
-			while (k >= 0) 
-			{
-				int temp = int(alph[k]);
-				for (int j = count; j < lastElement; j++)
-				{
 
-					mod = temp % 2;
-					temp /= 2;
-					if (binary[j] == mod)
+
+		int mod;
+		int lastElement = count + 3;
+		int stpcount = 0;
+		int k = 7;
+		while (k >= 0)
+		{
+			int temp = int(alph[k]);
+			for (int j = count; j < lastElement; j++)
+			{
+
+				mod = temp % 2;
+				temp /= 2;
+				if (binary[j] == mod)
+				{
+					//printf("%d - %d k= %d ", binary[j], mod,k);
+					stpcount++;
+					if (stpcount == 3)
 					{
-						//printf("%d - %d k= %d ", binary[j], mod,k);
-						stpcount++;
-						if (stpcount == 3)
-						{
-							printf("%c", alph[k]);
-							k = -1;
-						}
+						printf("%c", alph[k]);
+						k = -1;
 					}
-					else
-						--k;
-					
 				}
-				
+				else
+				{
+					--k;
+					stpcount = 0;
+					break;
+				}
+
 			}
-			count += 3;
-			
+
+		}
+		count += 3;
+
 	}
 	return 0;
 }
 int randomErr(char binary[])
 {
-	//if (rand() < RAND_MAX / 10)
-	//{
-		for (int i = 0; i < 30; i++)
-		{
-			int k = rand() % 30;
-			if (binary[k] == '1')
-				binary[k] = 0;
-			else
-				binary[k] = 1;
-			// 10% probability
-		}
-	//}
+	if (rand() < RAND_MAX / 10)
+	{
+	for (int i = 0; i < 30; i++)
+	{
+		int k = rand() % 30;
+		if (binary[k] == '1')
+			binary[k] = 0;
+		else
+			binary[k] = 1;
+		// 10% 
+	}
+	}
 	return 0;
 }
 int main()
@@ -118,6 +119,7 @@ int main()
 	printf("\n");
 	for (int i = 0; i < 90; i++)
 		printf("%d ", binary[i]);
-	Decrypt(binary, sent,alp);
+	printf("\n");
+	Decrypt(binary, sent, alp);
 	return 0;
 }
